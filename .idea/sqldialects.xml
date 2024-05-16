@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/cmd/migrate/migrations/20240516215500_add-user-table.down.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/cmd/migrate/migrations/20240516215500_add-user-table.up.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/cmd/migrate/migrations/20240516220235_add-product-table.down.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/cmd/migrate/migrations/20240516220235_add-product-table.up.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/cmd/migrate/migrations/20240516220249_add-order-table.down.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/cmd/migrate/migrations/20240516220249_add-order-table.up.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/cmd/migrate/migrations/20240516220841_add-user-createdAt.up.sql" dialect="GenericSQL" />
+    <file url="PROJECT" dialect="MySQL" />
+  </component>
+</project>
