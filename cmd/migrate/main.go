@@ -6,14 +6,13 @@ import (
 	"github.com/golang-migrate/migrate/v4/database/mysql"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 	"github.com/richieoscar/bigshop/config"
-	"github.com/richieoscar/bigshop/db"
 	"log"
 	"os"
 )
 
 func main() {
-	//init db
-	db, dbErr := db.NewMysqlStorage(myslCfg.Config{
+	//init domain
+	db, dbErr := config.NewMysqlStorage(myslCfg.Config{
 		User:                 config.Envs.DBUser,
 		Passwd:               config.Envs.DBPassword,
 		Addr:                 config.Envs.DBAddress,

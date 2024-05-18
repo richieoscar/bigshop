@@ -1,22 +1,21 @@
-package user
+package handler
 
 import (
 	"fmt"
+	"github.com/richieoscar/bigshop/domain"
 	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/richieoscar/bigshop/service/auth"
-
-	"github.com/richieoscar/bigshop/types"
+	"github.com/richieoscar/bigshop/dto"
 	"github.com/richieoscar/bigshop/utils"
 )
 
 type Handler struct {
-	store types.UserStore
+	store dto.UserRepository
 }
 
-func NewHandler(store types.UserStore) *Handler {
+func NewHandler(store dto.UserRepository) *Handler {
 	return &Handler{
 		store: store,
 	}
@@ -33,7 +32,7 @@ func (h *Handler) handleLogin(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handler) HandleRegister(w http.ResponseWriter, r *http.Request) {
 	//get json paylaod
-	var requestDto types.RegisterRequest //the struct we a serializing the json into a go Object
+	var requestDto dto.RegisterRequest //the struct we a serializing the json into a go Object
 	err := utils.ParseJson(r, &requestDto)
 	if err != nil {
 		utils.WriteError(w, http.StatusBadRequest, err)
@@ -58,13 +57,13 @@ func (h *Handler) HandleRegister(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func createUser(request types.RegisterRequest) types.User {
+func createUser(request dto.RegisterRequest) domain.User {
 	hasPass, err := hash(request.Password)
 	if err != nil {
-		return types.User{}
+		return domain.User{}
 	}
 
-	user := types.User{
+	user := domain.User{
 		FirstName: request.FirstName,
 		LastName:  request.LastName,
 		Email:     request.Email,
@@ -75,7 +74,7 @@ func createUser(request types.RegisterRequest) types.User {
 }
 
 func hash(password string) (string, error) {
-	hash, err := auth.HashPassword(password)
+	hash, err := utils.HashPassword(password)
 	if err != nil {
 		return "", fmt.Errorf("error hashing password")
 	}

@@ -1,30 +1,30 @@
-package user_test
+package test_test
 
 import (
 	"bytes"
 	"encoding/json"
+	"github.com/richieoscar/bigshop/handler"
+	"github.com/richieoscar/bigshop/test/mocks"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/gorilla/mux"
 
-	"github.com/richieoscar/bigshop/service/user"
-	"github.com/richieoscar/bigshop/service/user/mocks"
-	"github.com/richieoscar/bigshop/types"
+	"github.com/richieoscar/bigshop/dto"
 )
 
 func TestUserHandlerService(test *testing.T) {
 	userStore := mocks.NewUserStorMock()
-	handler := user.NewHandler(userStore)
+	handler := handler.NewHandler(userStore)
 
 	test.Run("Should fail with invlaid payload", func(t *testing.T) {
 
-		request := types.RegisterRequest{
-			FirsName: "Oscar",
-			LastName: "Richie",
-			Email:    "hey@email.com",
-			Password: "password",
+		request := dto.RegisterRequest{
+			FirstName: "Oscar",
+			LastName:  "Richie",
+			Email:     "hey@email.com",
+			Password:  "password",
 		}
 
 		marshal, _ := json.Marshal(request)
